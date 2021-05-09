@@ -10,11 +10,12 @@ fun main() {
     testProps["PARAM 2"] = "B"
 
     val s = StorageData("TEST AUTHOR EPTA", Algorithms.AES128CBC)
-    s.addEntity(passwd, "TEST ENTITY", testProps)
+    val t = s.addEntity(passwd, "TEST ENTITY", testProps)
 
     val raw = s.getResult(passwd)
 
     val testDecrypt = StorageData.read(passwd, Algorithms.AES128CBC, raw)
     println(testDecrypt.author)
+    println(testDecrypt.getEntity(passwd, t))
 }
 

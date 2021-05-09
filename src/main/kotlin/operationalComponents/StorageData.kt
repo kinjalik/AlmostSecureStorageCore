@@ -17,20 +17,29 @@ class StorageData (
     private var entityList: MutableList<TocEntity> = mutableListOf()
     private var dataMemory: MutableList<Byte> = mutableListOf()
 
-    fun addEntity(password: ByteArray, name: String, props: Map<String, String>): Int {
+    fun addEntity(password: ByteArray, name: String, props: Map<String, String>): TocEntity {
+        val contentOffset = dataMemory.size
+
         val dataEntity = DataEntity(name, props).serialize()
         val hiddenDataEntity: ByteArray = encAlgorithm.encrypt(dataEntity, password)
 
         val dataList = hiddenDataEntity.asList()
         dataMemory.addAll(dataList)
 
-        val contentOffset = dataMemory.size
         val contentSize = dataList.size
         val contentChecksum = dataEntity.hashCode()
 
         val tocEntity = TocEntity(name, contentOffset, contentSize, contentChecksum)
         entityList.add(tocEntity)
-        return entityList.size - 1
+        return tocEntity
+    }
+
+    fun getEntity(password: ByteArray, entity: TocEntity): DataEntity {
+        val offset = entity.contentOffset
+        val size = entity.contentSize
+        val encrypted: ByteArray = dataMemory.subList(offset, size + offset).toByteArray()
+        val decrypted = encAlgorithm.decrypt(encrypted, password)
+        return DataEntity.deserialize(decrypted)
     }
 
     fun getResult(password: ByteArray): ByteArray {
@@ -50,6 +59,7 @@ class StorageData (
         result += preamble
         result += encryptedToc
         result += encryptedContent
+        println(encryptedContent.toByteArray().toHexString())
         return result.toByteArray()
     }
 
