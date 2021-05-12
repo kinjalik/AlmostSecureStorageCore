@@ -1,0 +1,19 @@
+name: Perform automated tests
+on:
+  push:
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v2
+        with:
+          java-version: '15'
+          distribution: 'adopt'
+      - name: Run unit tests
+        run: gradle test
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
