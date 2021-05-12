@@ -29,6 +29,7 @@ class DataManipulationTests {
         assertEquals(database.author, authorName)
     }
 
+    // CRud
     @Test
     fun `Entity addition operation`() {
         val storage = StorageData(authorName, Algorithms.AES128CBC)
@@ -44,6 +45,51 @@ class DataManipulationTests {
 
             assertEquals(entityName, entityNames[counter])
             assertEquals(entityProps, propsForEntities[counter])
+        }
+    }
+
+    // crUd
+    @Test
+    fun `Entity update operation`() {
+        val storage = StorageData(authorName, Algorithms.AES128CBC)
+        for (i in propsForEntities.indices) {
+            storage.addEntity(password, "$i", mapOf())
+        }
+
+        for ((i, entity) in storage.entities.withIndex()) {
+            storage.updateEntity(password, entity, entityNames[i], propsForEntities[i])
+        }
+        println("GAOFJA")
+        for ((counter, tocEntity) in storage.entities.withIndex()) {
+            val dataEntity = storage.getEntity(password, tocEntity)
+
+            val entityName = dataEntity.name
+            val entityProps = dataEntity.properties
+
+            assertEquals(entityName, entityNames[counter])
+            assertEquals(entityProps, propsForEntities[counter])
+        }
+    }
+
+    // cruD
+    @Test
+    fun `Entity delete operation`() {
+        val storage = StorageData(authorName, Algorithms.AES128CBC)
+        for (i in propsForEntities.indices) {
+            storage.addEntity(password, entityNames[i], propsForEntities[i])
+        }
+
+        // Delete first
+        storage.deleteEntity(entityNames[0])
+
+        for ((counter, tocEntity) in storage.entities.withIndex()) {
+            val dataEntity = storage.getEntity(password, tocEntity)
+
+            val entityName = dataEntity.name
+            val entityProps = dataEntity.properties
+
+            assertEquals(entityName, entityNames[counter + 1])
+            assertEquals(entityProps, propsForEntities[counter + 1])
         }
     }
 }
