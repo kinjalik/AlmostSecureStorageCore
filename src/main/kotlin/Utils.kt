@@ -15,7 +15,7 @@ object Utils {
         var cur = v
         val res = mutableListOf<Byte>()
 
-        repeat (Long.SIZE_BYTES) {
+        repeat(Long.SIZE_BYTES) {
             res.add(cur.toByte())
             cur = cur shr Byte.SIZE_BITS
         }
@@ -26,7 +26,7 @@ object Utils {
         var cur = v
         val res = mutableListOf<Byte>()
 
-        repeat (Int.SIZE_BYTES) {
+        repeat(Int.SIZE_BYTES) {
             res.add(cur.toByte())
             cur = cur shr Byte.SIZE_BITS
         }
@@ -51,7 +51,7 @@ object Utils {
 
     fun deserializeLong(stream: List<Byte>): Long {
         var res = 0L
-        repeat (Long.SIZE_BYTES) {
+        repeat(Long.SIZE_BYTES) {
             res = res shl Byte.SIZE_BITS
             res = res or (stream[it].toLong() and 0xffL)
         }
@@ -60,7 +60,7 @@ object Utils {
 
     fun deserializeInt(stream: List<Byte>): Int {
         var res = 0
-        repeat (Int.SIZE_BYTES) {
+        repeat(Int.SIZE_BYTES) {
             res = res shl Byte.SIZE_BITS
             res = res or (stream[it].toInt() and 0xff)
         }

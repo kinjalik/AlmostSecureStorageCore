@@ -9,12 +9,11 @@ import storedComponents.Preamble
 import storedComponents.TocEntity
 import toHexString
 
-class StorageData (
+class StorageData(
     val author: String,
     private val encAlgorithmId: Algorithms = Algorithms.AES128CBC
-        ){
+) {
     private val encAlgorithm = encAlgorithmId.getAlgorithm()
-
 
     private var internalEntityList: MutableList<TocEntity> = mutableListOf()
     private var dataMemory: MutableList<Byte> = mutableListOf()
@@ -125,7 +124,7 @@ class StorageData (
         internalEntityList.forEach {
             tableOfContent += it.serialize().asList()
         }
-        val encryptedToc = encAlgorithm.encrypt(tableOfContent.toByteArray(),password).asList()
+        val encryptedToc = encAlgorithm.encrypt(tableOfContent.toByteArray(), password).asList()
 
         val tocChecksum = tableOfContent.hashCode()
         val tocSize = encryptedToc.size
@@ -161,7 +160,7 @@ class StorageData (
 
             val encryptedData = lst.subList(startOfToc + sizeOfToc, lst.size).toByteArray()
 
-            val res = StorageData(preamble.author,encAlgoId)
+            val res = StorageData(preamble.author, encAlgoId)
             res.dataMemory = encryptedData.toMutableList()
             res.internalEntityList = toc
 

@@ -4,7 +4,6 @@ import java.security.MessageDigest
 import javax.crypto.Cipher
 import javax.crypto.spec.SecretKeySpec
 
-
 class AesAlgorithm : CryptographyAlgorithm {
 
     private fun passwordToKey(password: ByteArray): ByteArray {

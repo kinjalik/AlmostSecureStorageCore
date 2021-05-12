@@ -42,7 +42,6 @@ data class DataEntity(
             ptr += propertiesSize
 
             return DataEntity(name, properties)
-
         }
     }
 }

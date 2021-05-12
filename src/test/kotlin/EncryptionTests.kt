@@ -1,7 +1,6 @@
 import cryptography.AesAlgorithm
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import storedComponents.DataEntity
 import kotlin.random.Random
 
 class EncryptionTests {
