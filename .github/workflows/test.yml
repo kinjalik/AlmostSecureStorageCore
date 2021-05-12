@@ -2,7 +2,7 @@ name: Perform automated tests
 on:
   push:
 jobs:
-  publish:
+  test:
     runs-on: ubuntu-latest
     permissions:
       contents: read
