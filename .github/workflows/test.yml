@@ -1,6 +1,8 @@
-name: Perform automated tests
+name: Perform automated tests on auxillary branches
 on:
   push:
+    branches-ignore:
+      - master
 jobs:
   test:
     runs-on: ubuntu-latest
