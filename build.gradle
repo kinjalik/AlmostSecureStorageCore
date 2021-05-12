@@ -15,7 +15,6 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.5.0"
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.0"
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 }
 
@@ -29,7 +28,7 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/kinjalik/AlmostSecureStorageCore")
             credentials {
-                username = System.getenv("GUTHUB_ACTOR")
+                username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_TOKEN")
                 println "GitHubPackages build.gradle\n\tusername=$username\n\ttoken=$password"
             }
