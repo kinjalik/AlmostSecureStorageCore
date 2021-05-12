@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'ru.kinjalik'
-version '0.1.1'
+version '0.1.2'
 
 repositories {
     mavenCentral()
@@ -31,7 +31,6 @@ publishing {
             credentials {
                 username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_TOKEN")
-                println "GitHubPackages build.gradle\n\tusername=$username\n\ttoken=$password"
             }
         }
     }
@@ -40,7 +39,7 @@ publishing {
         gpr(MavenPublication) {
             groupId = "ru.kinjalik"
             artifactId = "almost-secure-storage-core"
-            version = "0.1.1"
+            version = project.version
             from(components.java)
         }
     }
