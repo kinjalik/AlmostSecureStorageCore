@@ -1,6 +1,6 @@
 package cryptography
 
 interface CryptographyAlgorithm {
-    fun encrypt(byteArray: ByteArray, key: ByteArray): ByteArray
-    fun decrypt(byteArray: ByteArray, key: ByteArray): ByteArray
+    fun encrypt(byteArray: ByteArray, password: ByteArray): ByteArray
+    fun decrypt(byteArray: ByteArray, password: ByteArray): ByteArray
 }
