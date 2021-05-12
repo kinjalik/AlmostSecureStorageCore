@@ -57,5 +57,3 @@ task lint(type: JavaExec, group: "verification") {
     main = "com.pinterest.ktlint.Main"
     args "src/**/*.kt --disabled-rules=import-ordering"
 }
-
-check.dependsOn lint
