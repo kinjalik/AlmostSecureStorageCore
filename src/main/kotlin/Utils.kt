@@ -1,3 +1,5 @@
+import exceptions.SerializationException
+
 fun ByteArray.toHexString() = joinToString("") { "%02x".format(it) }
 
 fun println(v: List<Byte>) {
