@@ -18,4 +18,3 @@ fun Algorithms.getAlgorithm(): CryptographyAlgorithm {
         else -> AesAlgorithm() // Default algo
     }
 }
-

@@ -1,6 +1,6 @@
-import storedComponents.DataEntity
 import cryptography.Algorithms
 import operationalComponents.StorageData
+
 import kotlin.collections.HashMap
 
 fun main() {
@@ -18,4 +18,3 @@ fun main() {
     println(testDecrypt.author)
     println(testDecrypt.getEntity(passwd, t))
 }
-

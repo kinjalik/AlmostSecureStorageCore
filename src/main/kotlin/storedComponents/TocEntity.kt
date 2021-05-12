@@ -23,7 +23,6 @@ data class TocEntity(
             res += Int.SIZE_BYTES
 
             return res
-
         }
 
     val nameSize: Int
@@ -64,7 +63,6 @@ data class TocEntity(
             ptr += Int.SIZE_BYTES
 
             return TocEntity(name, contentOffset, contentSize, contentChecksum)
-
         }
     }
 }
