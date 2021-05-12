@@ -25,19 +25,17 @@ test {
 
 publishing {
     repositories {
-       maven {
+        maven {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/kinjalik/AlmostSecureStorageCore")
             credentials {
-                if (System.getenv("GITHUB_ACTOR" == null)) {
+                username = System.getenv("GUTHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+                if (username == null) {
                     def localProperties = new Properties()
                     localProperties.load(new FileInputStream("local.properties"))
                     username = localProperties["GITHUB_ACTOR"]
                     password = localProperties["GITHUB_TOKEN"]
-                } else {
-                    username = System.getenv("GITHUB_ACTOR")
-                    password = System.getenv("GITHUB_TOKEN")
-
                 }
                 println "GitHubPackages build.gradle\n\tusername=$username\n\ttoken=$password"
             }
@@ -48,7 +46,7 @@ publishing {
         gpr(MavenPublication) {
             groupId = "ru.kinjalik"
             artifactId = "almost-secure-storage-core"
-            version = "0.1"
+            version = "0.1.1"
             from(components.java)
         }
     }
