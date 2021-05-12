@@ -178,4 +178,4 @@ gradle-app.setting
 **/build/
 
 # End of https://www.toptal.com/developers/gitignore/api/java,kotlin,gradle,intellij,linux
-
+local.properties

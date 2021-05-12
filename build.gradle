@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'ru.kinjalik'
-version '1.0-SNAPSHOT'
+version '0.1.1'
 
 repositories {
     mavenCentral()
@@ -23,15 +23,28 @@ test {
     useJUnitPlatform()
 }
 
+def localProperties = new Properties()
+localProperties.load(new FileInputStream("local.properties"))
+
 publishing {
     repositories {
-        maven {
+       maven {
             name = "GitHubPackages"
-            url = "https://maven.pkg.github.com/kinjalik/AlmostSecureStorageCore"
+            url = uri("https://maven.pkg.github.com/kinjalik/AlmostSecureStorageCore")
             credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
+                username = System.getenv("GITHUB_ACTOR") ?: localProperties["GITHUB_ACTOR"]
+                password = System.getenv("GITHUB_TOKEN") ?: localProperties["GITHUB_TOKEN"]
+                println "GitHubPackages build.gradle\n\tusername=$username\n\ttoken=$password"
             }
+        }
+    }
+    publications {
+
+        gpr(MavenPublication) {
+            groupId = "ru.kinjalik"
+            artifactId = "almost-secure-storage-core"
+            version = "0.1"
+            from(components.java)
         }
     }
 }
