@@ -1,4 +1,5 @@
 import cryptography.Algorithms
+import operationalComponents.StorageData
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import storedComponents.DataEntity
@@ -9,6 +10,18 @@ import kotlin.random.Random
 class SerializationTests {
     val random = Random(264726827)
     val testAuthorName = "Albert Akmukhametov"
+
+    // Storage Data
+    @Test
+    fun `Storage Data Serialization`() {
+        val storage = StorageData("Albert Akmukhametov", Algorithms.AES128CBC)
+        val password = random.nextBytes(20)
+
+        val encBytes = storage.getResult(password)
+        val deEncStorageData = StorageData.read(password, encBytes)
+
+        assertEquals(storage.author, deEncStorageData.author)
+    }
 
     // Preamble
     val testAlgorithm = Algorithms.fromId(1)
