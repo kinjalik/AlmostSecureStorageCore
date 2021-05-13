@@ -139,11 +139,12 @@ class StorageData(
     }
 
     companion object {
-        fun read(password: ByteArray, encAlgoId: Algorithms, byteArray: ByteArray): StorageData {
-            val encAlgo = encAlgoId.getAlgorithm()
-
+        fun read(password: ByteArray, byteArray: ByteArray): StorageData {
             val lst = byteArray.asList()
             val preamble = Preamble.deserialize(byteArray)
+
+            val encAlgoId = preamble.encryptionAlgo
+            val encAlgo = encAlgoId.getAlgorithm()
 
             val startOfToc = preamble.size
             val sizeOfToc = preamble.tocSize
