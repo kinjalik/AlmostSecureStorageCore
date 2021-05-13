@@ -51,6 +51,12 @@ publishing {
     }
 }
 
+jar {
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
 task lint(type: JavaExec, group: "verification") {
     description = "Kotlin code style check."
     classpath = configurations.ktlint
