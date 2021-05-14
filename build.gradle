@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'ru.kinjalik'
-version '0.2.3'
+version '0.2.4'
 
 repositories {
     mavenCentral()
@@ -54,6 +54,10 @@ publishing {
 jar {
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    } {
+        exclude "META-INF/*.SF"
+        exclude "META-INF/*.DSA"
+        exclude "META-INF/*.RSA"
     }
 }
 
