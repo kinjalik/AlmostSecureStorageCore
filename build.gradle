@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'ru.kinjalik'
-version '0.2.5'
+version '0.2.10'
 
 repositories {
     mavenCentral()
@@ -16,15 +16,20 @@ configurations {
 }
 
 dependencies {
-    runtimeOnly "org.jetbrains.kotlin:kotlin-stdlib:1.5.0"
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib"
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.0"
 
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 
     ktlint "com.pinterest:ktlint:0.41.0"
-
 }
 
+task lint(type: JavaExec, group: "verification") {
+    description = "Kotlin code style check."
+    classpath = configurations.ktlint
+    main = "com.pinterest.ktlint.Main"
+    args "src/**/*.kt --disabled-rules=import-ordering"
+}
 test {
     useJUnitPlatform()
 }
@@ -51,19 +56,3 @@ publishing {
     }
 }
 
-jar {
-    from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    } {
-        exclude "META-INF/*.SF"
-        exclude "META-INF/*.DSA"
-        exclude "META-INF/*.RSA"
-    }
-}
-
-task lint(type: JavaExec, group: "verification") {
-    description = "Kotlin code style check."
-    classpath = configurations.ktlint
-    main = "com.pinterest.ktlint.Main"
-    args "src/**/*.kt --disabled-rules=import-ordering"
-}
