@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'ru.kinjalik'
-version '0.2.13'
+version '0.2.14'
 
 repositories {
     mavenCentral()
@@ -53,11 +53,5 @@ publishing {
             version = project.version
             from(components.java)
         }
-    }
-}
-
-jar {
-    from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
