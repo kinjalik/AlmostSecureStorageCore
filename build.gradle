@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'ru.kinjalik'
-version '0.2.10'
+version '0.2.11'
 
 repositories {
     mavenCentral()
@@ -16,11 +16,9 @@ configurations {
 }
 
 dependencies {
-    compileOnly "org.jetbrains.kotlin:kotlin-stdlib"
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.0"
 
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
-
     ktlint "com.pinterest:ktlint:0.41.0"
 }
 
