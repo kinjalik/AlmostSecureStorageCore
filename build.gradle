@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'ru.kinjalik'
-version '0.2.11'
+version '0.2.12'
 
 repositories {
     mavenCentral()
@@ -13,6 +13,7 @@ repositories {
 
 configurations {
     ktlint
+    runtimeClasspaht
 }
 
 dependencies {
@@ -54,3 +55,8 @@ publishing {
     }
 }
 
+jar {
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
