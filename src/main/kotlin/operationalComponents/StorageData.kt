@@ -134,7 +134,7 @@ class StorageData(
         result += preamble
         result += encryptedToc
         result += encryptedContent
-        println(encryptedContent.toByteArray().toHexString())
+        // println(encryptedContent.toByteArray().toHexString())
         return result.toByteArray()
     }
 
